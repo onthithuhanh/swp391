@@ -6,7 +6,6 @@ import {
   ShoppingBagIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import ShoppingCart from "../../Authenticator/ShoppingCart/ShoppingCart";
 import { routs } from "../../../constants/ROUT";
 import { ComLink } from "../ComLink/ComLink";
 import { Affix, FloatButton, } from "antd";
@@ -21,9 +20,11 @@ import { useStorage } from "../../../hooks/useLocalStorage";
 
 const navigation = {
   pages: [
-    { name: textApp.Header.home, href: "/", },
-    { name: "Sản phẩm", href: "/product/all", },
-    { name: textApp.Header.required, href: "/required", },
+    { name: 'Trang chủ', href: "/", },
+    { name: "Tin tức, chia sẻ", href: "/", },
+    { name: 'Báo giá chuẩn', href: "/", },
+    { name: 'Giá dự kiến', href: "/", },
+    { name: 'Liên hệ', href: "/", },
   ],
 
 };
@@ -80,11 +81,7 @@ export default function ComHeader({ dataCart, updateCart }) {
 
   return (
     <>
-      <ShoppingCart
-        show={shoppingCart}
-        updateShoppingCart={updateShoppingCartStatus}
 
-      ></ShoppingCart>
       <Affix offsetTop={0} >
         <div className="bg-white ">
           {/* Mobile menu */}
@@ -191,7 +188,7 @@ export default function ComHeader({ dataCart, updateCart }) {
                     <ComLink to={routs["/"].link}>
                       <span className="sr-only">Your Company</span>
                       <img
-                        className="h-16 w-auto "
+                        className="h-10 w-auto "
                         src={images.logo}
                         alt=""
                       />
@@ -199,76 +196,40 @@ export default function ComHeader({ dataCart, updateCart }) {
                   </div>
 
                   {/* Flyout menus */}
-                  <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
-                    <div className="flex h-full space-x-8">
 
-
-                      {navigation.pages.map((page) => (
-                        <Link
-                          key={page.name}
-                          to={page.href}
-                          className="flex items-center text-base font-medium text-gray-700 hover:text-gray-800"
-                        >
-                          <div className="flex gap-2 justify-center">
-                            {page.icon}
-                            <p>{page.name}</p>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                  </Popover.Group>
 
                   <div className="ml-auto flex items-center">
 
-                    {/* Search */}
-                    <div className="flex lg:ml-6">
-                      <FormProvider {...methods} >
-                        <form onSubmit={handleSubmit(onSubmit)} className="lg:w-96">
-                          <ComInput
-                            placeholder={textApp.Header.search}
-                            search
 
-                            type="text"
+                    <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
+                      <div className="flex h-full space-x-8">
+                        {navigation.pages.map((page) => (
+                          <Link
+                            key={page.name}
+                            to={page.href}
+                            className="flex items-center text-base font-medium text-gray-700 hover:text-gray-800"
+                          >
+                            <div className="flex gap-2 justify-center">
+                              {page.icon}
+                              <p>{page.name}</p>
+                            </div>
+                          </Link>
+                        ))}
 
-                            {...register("search")}
-                          />
-                        </form>
-                      </FormProvider>
-                    </div>
 
-                    {/* Cart */}
-                    <div className="ml-4 flow-root lg:ml-6">
-                      <button
-                        onClick={() => {
-                          setShoppingCart(true);
-                        }}
-                        className="group -m-2 flex items-center p-2"
-                      >
-                        <ShoppingBagIcon
-                          className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-                          aria-hidden="true"
-                        />
-                        <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                          {dataCart?.length || cart.length}
-                        </span>
-                        <span className="sr-only">items in cart, view bag</span>
-                      </button>
-                    </div>
+                      </div>
+                    </Popover.Group>
+
+
                     {/* login */}
                     {!sttLogin?._doc && <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6 lg:ml-6">
-                      <ComLink
-                        to={routs["/login"].link}
+                      <Link
+                        to={"/login"}
                         className="text-sm font-medium text-gray-700 hover:text-gray-800"
                       >
-                        {routs["/login"].name}
-                      </ComLink>
-                      <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
-                      <ComLink
-                        to={routs["/reissue"].link}
-                        className="text-sm font-medium text-gray-700 hover:text-gray-800"
-                      >
-                        {routs["/reissue"].name}
-                      </ComLink>
+                        Đăng nhập
+                      </Link>
+
                     </div>}
 
                     {sttLogin?._doc && <div>
