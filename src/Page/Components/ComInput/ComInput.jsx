@@ -50,6 +50,7 @@ const ComInput = React.forwardRef(
   (
     {
       label,
+      labelClassName,
       required,
       className,
       onChangeValue,
@@ -111,8 +112,8 @@ const ComInput = React.forwardRef(
       <>
         <div className={`${className}`}>
           {label && (
-            <div className="mb-4 flex justify-between">
-              <label htmlFor={inputId} className="text-paragraph font-bold">
+            <div className={`mb-4 flex justify-between ${labelClassName}`}>
+              <label htmlFor={inputId} className={`text-paragraph font-bold w-max `}>
                 {label}
                 {required && (
                   <span className="text-paragraph font-bold text-error-7 text-red-500">
